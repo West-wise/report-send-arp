@@ -133,9 +133,9 @@ int main(int argc, char* argv[]) {
 	packet.arp_.pln_ = Ip::SIZE;
 	packet.arp_.op_ = htons(ArpHdr::Request);
 	packet.arp_.smac_ = Mac(macAddress);
-	packet.arp_.sip_ = htonl(Ip("192.168.43.1"));
-	packet.arp_.tmac_ = Mac(getSMAC("192.168.43.174","eth0",macAddress,"192.168.43.1"));
-	packet.arp_.tip_ = htonl(Ip("192.168.43.174"));
+	packet.arp_.sip_ = htonl(Ip(argv[3]));
+	packet.arp_.tmac_ = Mac(getSMAC(argv[2],argv[1],macAddress,argv[3]));
+	packet.arp_.tip_ = htonl(Ip(argv[2]));
 
 	int res = pcap_sendpacket(handle, reinterpret_cast<const u_char*>(&packet), sizeof(EthArpPacket));
 	if (res != 0) {
