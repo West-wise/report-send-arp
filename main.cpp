@@ -105,13 +105,7 @@ EthArpPacket Make_packet(const std::string& interfaceName,
                          const std::string& my_mac,
                          const std::string& sip,
                          const std::string& tip) {
-    /*
-    interfaceName - 네트워크 인터페이스
-    my_mac - getMacAddress - 내 MAC
-    sip - gateway ip
-    tip - victim ip
-    */
-
+    
     EthArpPacket packet;
 
     char errbuf[PCAP_ERRBUF_SIZE];
@@ -146,13 +140,7 @@ int main(int argc, char* argv[]) {
         if (argc >= 12) {
                 usage();
                 return -1;
-        }
-        //get Attacker MAC
-        
-        
-
-
-
+        }        
         char* dev = argv[1]; //네트워크 인터페이스 명
         char errbuf[PCAP_ERRBUF_SIZE];
 
@@ -166,8 +154,6 @@ int main(int argc, char* argv[]) {
                 return -1;
         }
         
-        
-
         for(int i=2; i<argc-1; i++){
                 
         /*
@@ -180,12 +166,6 @@ int main(int argc, char* argv[]) {
                 EthArpPacket packet = Make_packet(dev , macAddress ,sip,tip);
                 send_packet(handle,packet);
         }
-
-        // int res = pcap_sendpacket(*handle, reinterpret_cast<const u_char*>(&packet), sizeof(EthArpPacket));
-        // if (res != 0) {
-        //         fprintf(stderr, "pcap_sendpacket return %d error=%s\n", res, pcap_geterr(handle));
-        // }
-
         pcap_close(handle);
 }
        
