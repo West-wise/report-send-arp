@@ -148,8 +148,8 @@ int main(int argc, char* argv[]) {
         std::string macAddress = getMacAddress(interfaceName);
         std::string sip,tip;
 
-        pcap_t* handle = pcap_open_live(argv[1], 0, 0, 0, errbuf);
-        if (handle == nullptr) {
+        pcap_t* handle = pcap_open_live(dev, BUFSIZ, 1, 1, errbuf);
+	if (handle == nullptr) {
                 fprintf(stderr, "couldn't open device %s(%s)\n", dev, errbuf);
                 return -1;
         }
